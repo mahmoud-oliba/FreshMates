@@ -1,0 +1,38 @@
+<div>
+  <div class="container flex_container">
+    <div>
+      <div>
+        <h2 class="header" i18n>Premium Coffee Beans</h2>
+        <p i18n>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam risus
+          nibh, feugiat nec sapien ac, faucibus luctus odio. Nam nec porta leo.
+          Donec scelerisque libero ac luctus aliquam. Integer fringilla sed dui
+          euismod placerat. Fusce vitae odio est. Nulla id eros mi. Integer
+          vitae mauris et felis pulvinar pellentesque. Praesent a auctor odio.
+          Morbi lacinia aliquet augue, non auctor ipsum vehicula a.
+        </p>
+      </div>
+
+      <div>
+        <div class="grid_container">
+          @for (item of items; track $index) {
+          <div class="item_container">
+            <div [class.ar_icon_right]="lang == 'ar'">
+              <img src="{{ item.image }}" />
+            </div>
+
+            <div>
+              <p i18n class="text1">{{ item.title[lang] }}</p>
+              <p i18n>{{ item.subtitle[lang] }}</p>
+            </div>
+          </div>
+
+          }
+        </div>
+      </div>
+    </div>
+    <div>
+      <img src="assets/banner-premium.webp" width="100%" />
+    </div>
+  </div>
+</div>

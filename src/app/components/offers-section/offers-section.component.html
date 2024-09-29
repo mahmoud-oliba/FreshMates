@@ -1,0 +1,29 @@
+<div class="container text-center spacing">
+  <h2 class="header_title" i18n>Our Delicious Offer</h2>
+  <p class="header_paragraph" i18n>
+    Shop our best selling collections for a range of styles loved by you
+  </p>
+
+  <ngx-slick-carousel
+    class="carousel"
+    [class.ltr]="ltr"
+    #slickModal="slick-carousel"
+    [config]="slideConfig"
+  >
+    @for (item of items; track $index) {
+    <div class="slide m-3" ngxSlickItem>
+      <div>
+        <a>
+          <div class="home_item_image">
+            <img src="{{ item.image }}" />
+          </div>
+        </a>
+      </div>
+      <div class="home_item_text">
+        <p i18n>{{ item.title[lang] }}</p>
+      </div>
+    </div>
+
+    }
+  </ngx-slick-carousel>
+</div>

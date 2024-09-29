@@ -1,0 +1,12 @@
+button{
+    font-size: 20px;
+}
+li{
+    list-style-type:  upper-roman;
+    margin: auto 1em;
+}
+p{
+    font-size: 13px;
+    font-weight: lighter;
+    padding-top: 10px;
+}

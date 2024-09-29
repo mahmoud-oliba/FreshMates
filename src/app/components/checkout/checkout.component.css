@@ -1,0 +1,108 @@
+.brd {
+    border: 2px solid black;
+    vertical-align: middle;
+    height: 1200px;
+    translate: 300 300 300;
+}
+
+.gray {
+    background-color: #F5F5F5;
+}
+.clr{
+    color: #1773B0 !important;
+}
+.link {
+    text-decoration: underline;
+}
+#visa{
+    background-color: white !important;
+    color: #142688 !important;
+}
+#master{
+    background-color: white !important;
+    color: #142688 !important;
+}
+#discover{
+    background-color: white !important;
+    color: #142688 !important;
+}
+.bg{
+    background-color: #F4F4F4 !important;
+}
+.bg1{
+    background-color: #1773B0 !important;
+    height: 60px !important;
+}
+.ml{
+    margin-left: 200px !important;
+}
+.clickable {
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+.clickable:hover {
+    color: #1773B0;
+}
+.number-badge {
+    position: absolute;
+    top: 0;
+    left: 140px; /* Adjust the distance from the left edge of the image */
+    background-color: #666666; /* Choose your desired background color */
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+  }
+  .toast-container {
+    position: fixed !important;
+    bottom: 20px !important; 
+    left: 85% !important;
+    transform: translateX(-50%) !important;
+    z-index: 1000000000 !important; 
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important; 
+}
+
+.toast {
+    width: 466px !important;
+    overflow: hidden !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    border-radius: 0.25rem !important;
+}
+
+.toast-header {
+    background-color: #52271f !important;
+    color: white !important;
+    gap: 10px !important;
+}
+
+.toast-header p{
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.toast-body{
+    background-color: white !important;
+    height: 81px !important;
+    padding: 0 !important;
+}
+.color1{
+    color: #5A9CC7 !important;
+}
+
+.message{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+    padding-left: 13px;
+    padding-top: 18px;
+}
+
+.confirmation-message{
+    font-weight: bolder;
+    font-size: 16px;
+}

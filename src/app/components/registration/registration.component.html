@@ -1,0 +1,261 @@
+<div
+  class="modal fade"
+  id="registrationModal"
+  tabindex="-1"
+  aria-labelledby="registrationModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" id="registration">
+      <div class="btn_container">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closeButton
+        ></button>
+      </div>
+      <div class="modal-body m-4">
+        <div>
+          <div class="registration_container">
+            @if(lang =="en") {
+            <div class="login_switcher {{ toggle ? 'toggle' : '' }}"></div>
+            } @else {
+            <div class="login_switcher {{ toggle ? 'toggle_ar' : '' }}"></div>
+
+            }
+            <div
+              data-bs-toggle="collapse"
+              data-bs-target="#login"
+              aria-expanded="true"
+              aria-controls="login"
+              (click)="handleToggle($event, 'loginBtn')"
+              id="loginBtn"
+              i18n
+            >
+              Login
+            </div>
+            <div
+              data-bs-toggle="collapse"
+              data-bs-target="#signup"
+              aria-expanded="false"
+              aria-controls="signup"
+              (click)="handleToggle($event, 'signupBtn')"
+              id="signupBtn"
+              i18n
+            >
+              Signup
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="login"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#registration"
+        >
+          <p class="reg_title" i18n>Insert your account information:</p>
+          <form [formGroup]="loginData">
+            <div *ngIf="errMessageLogin" class="form-text text-danger">
+              {{ errMessageLogin }}
+            </div>
+            <div class="d-flex flex-column mb-3">
+              <div
+                *ngIf="Email.invalid && (Email.dirty || Email.touched)"
+                class="form-text text-danger"
+              >
+                <div *ngIf="Email.errors?.['required']" i18n>
+                  Email is required.
+                </div>
+                <div *ngIf="Email.errors?.['pattern']" i18n>
+                  Should be valid email
+                </div>
+              </div>
+              <label for="email" class="form-label" i18n>Email Address</label>
+              <input
+                class="form-control"
+                formControlName="email"
+                type="email"
+                name="email"
+                id="email"
+                required="true"
+                i18n-placeholder
+                placeholder="ENTER YOUR EMAIL"
+              />
+            </div>
+            <div class="d-flex flex-column mb-3">
+              <div
+                *ngIf="Password.invalid && (Password.dirty || Password.touched)"
+                class="form-text text-danger"
+              >
+                <div *ngIf="Password.errors?.['required']" i18n>
+                  Password is required.
+                </div>
+                <div *ngIf="Password.errors?.['minlength']" i18n>
+                  Password should be at least 6 characters.
+                </div>
+              </div>
+              <label class="form-label" for="password" i18n>Password</label>
+              <input
+                class="form-control"
+                formControlName="password"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="**********"
+                required
+              />
+            </div>
+            <!-- <div>
+              <a>Forget Password</a>
+            </div> -->
+            <button type="submit" class="btn reg_btns" (click)="login()" i18n>
+              Login
+            </button>
+          </form>
+        </div>
+
+        <div
+          id="signup"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#registration"
+        >
+          <p class="reg_title" i18n>Create your account</p>
+          <form [formGroup]="signupData">
+            <div *ngIf="errMessageSignup" class="form-text text-danger">
+              {{ errMessageSignup }}
+            </div>
+            <div class="d-flex flex-column mb-3">
+              <div
+                *ngIf="
+                  EmailSignup.invalid &&
+                  (EmailSignup.dirty || EmailSignup.touched)
+                "
+                class="form-text text-danger"
+              >
+                <div *ngIf="EmailSignup.errors?.['required']" i18n>
+                  Email is required.
+                </div>
+                <div *ngIf="EmailSignup.errors?.['pattern']" i18n>
+                  Should be valid email
+                </div>
+              </div>
+              <label for="email" class="form-label" i18n>Email Address</label>
+              <input
+                class="form-control"
+                formControlName="email"
+                type="email"
+                name="email"
+                id="email"
+                required="true"
+                i18n-placeholder
+                placeholder="ENTER YOUR EMAIL"
+              />
+            </div>
+            <div class="d-flex flex-column mb-3">
+              <div
+                *ngIf="Username.invalid && (Username.dirty || Username.touched)"
+                class="form-text text-danger"
+              >
+                <div *ngIf="Username.errors?.['required']" i18n>
+                  User name is required.
+                </div>
+                <div *ngIf="Username.errors?.['minlength']" i18n>
+                  User name should be at least 3 characters.
+                </div>
+              </div>
+              <label for="username" class="form-label" i18n>User name</label>
+              <input
+                class="form-control"
+                formControlName="username"
+                type="text"
+                name="username"
+                id="username"
+                required="true"
+                i18n-placeholder
+                placeholder="USERNAME"
+              />
+            </div>
+            <div class="d-flex flex-column mb-3">
+              <div
+                *ngIf="
+                  PasswordSignup.invalid &&
+                  (PasswordSignup.dirty || PasswordSignup.touched)
+                "
+                class="form-text text-danger"
+              >
+                <div *ngIf="PasswordSignup.errors?.['required']" i18n>
+                  Password is required.
+                </div>
+                <div *ngIf="PasswordSignup.errors?.['minlength']" i18n>
+                  Password should be at least 6 characters.
+                </div>
+              </div>
+              <label class="form-label" for="password" i18n>Password</label>
+              <input
+                class="form-control"
+                formControlName="password"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="**********"
+                required
+              />
+            </div>
+
+            <div class="d-flex flex-column mb-3">
+              <div
+                *ngIf="Avatar.invalid && (Avatar.dirty || Avatar.touched)"
+                class="form-text text-danger"
+              >
+                <div *ngIf="Avatar.errors?.['required']" i18n>
+                  Image is required.
+                </div>
+              </div>
+              <label class="form-label" for="avatar" i18n>Avatar</label>
+              <input
+                class="form-control"
+                type="file"
+                name="avatar"
+                id="avatar"
+                accept=".jpg,.jpeg,.webp,.png"
+                required
+                (change)="onFileChange($event)"
+              />
+            </div>
+
+            <div class="d-flex flex-column mb-3">
+              <div
+                *ngIf="Gender.invalid && (Gender.dirty || Gender.touched)"
+                class="form-text text-danger"
+              >
+                <div *ngIf="Gender.errors?.['required']" i18n>
+                  Gender is required.
+                </div>
+              </div>
+
+              <label for="gender" class="form-label" i18n>Gender</label>
+              <select
+                formControlName="gender"
+                id="gender"
+                name="gender"
+                class="form-select"
+                aria-label="Default select example"
+                required
+              >
+                <option value="male" i18n>Male</option>
+                <option value="female" i18n>Female</option>
+              </select>
+            </div>
+            <button type="submit" class="btn reg_btns" (click)="signup()" i18n>
+              Sign Up
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

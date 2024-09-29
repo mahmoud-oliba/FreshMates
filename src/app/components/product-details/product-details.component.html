@@ -1,0 +1,451 @@
+<div class="whole d-flex row">
+  <div class="list-sub-items position-relative">
+    <ol class="breadcrumb">
+      <li class="list-inline-item">
+        <a i18n href="/" class="item-breacrumb item-home">Home .</a>
+      </li>
+      <li id="path-title" class="list-inline-item">
+        <span class="item-breacrumb">
+          <ng-container i18n>products</ng-container>
+        </span>
+      </li>
+    </ol>
+  </div>
+  <div class="row res">
+    <div class="first-half col-lg-6 col-sm-12" [class.ltr]="ltr">
+      <div class="carousel-container">
+        <gallery class="gallery" [items]="items"></gallery>
+      </div>
+    </div>
+
+    <div class="second-half col-lg-6 col-sm-12 mb-sm-30">
+      <div class="first-row">
+        <h2 class="product-title-main">{{ product.title[lang] }}</h2>
+        <div class="d-flex gap-4">
+          <app-rating-stars></app-rating-stars>
+          <a i18n class="cursor">VIEW ALL REVIEWS</a>
+        </div>
+
+        <div class="icons" [class.icons_ltr_position]="ltr">
+          <p
+            [class.icons_ltr_position]="ltr"
+            (click)="addToWishlist(productId)"
+            [ngClass]="{
+              favorite: !isHeartSolid,
+              unfavorite: isHeartSolid
+            }"
+          >
+            <i
+              [ngClass]="{
+                'fa-regular': !isHeartSolid,
+                'fa-solid': isHeartSolid
+              }"
+              class="fa-heart"
+            >
+            </i>
+          </p>
+        </div>
+      </div>
+
+      <div class="product-details">
+        <p class="price">
+          {{ product.price | currency : (lang == "en" ? "USD" : "ج.م") }}
+        </p>
+        <p class="description">{{ product.desc[lang] }}</p>
+        <div
+          class="deal-flash__sale-progress position-relative"
+          style="background-color: #e0e0e0"
+        >
+          <div
+            class="progress__bar position-absolute"
+            style="
+              width: 88%;
+              background: linear-gradient(
+                90deg,
+                rgba(249, 200, 88, 1),
+                rgba(255, 130, 70, 1) 100%
+              );
+            "
+          ></div>
+          <img
+            src="//nov-freshmate.myshopify.com/cdn/shop/files/icon_fire_66x.png?v=1691744504"
+            class="position-absolute i_flash"
+          />
+          <p i18n class="offer">
+            88% Sold - Only {{ product.quantity }} item(s) left in stock!
+          </p>
+        </div>
+      </div>
+
+      <div class="buttons-product d-flex flex-column gap-2">
+        @if(product.quantity != 0) {
+        <div class="d-flex gap-4">
+          <app-quantity-increment-decrement
+            [max]="product.quantity"
+          ></app-quantity-increment-decrement>
+          <button i18n class="add-to-bag-btn" (click)="addToCart(product._id)">
+            ADD TO BAG
+          </button>
+        </div>
+        }
+
+        <!-- <a i18n routerLink="/checkout">
+          <button class="buy-it-now-btn">BUY IT NOW</button>
+        </a> -->
+      </div>
+
+      <div class="product-share-info-faq d-flex flex-row gap-4">
+        <div
+          class="share-option d-flex flex-row gap-2"
+          data-bs-toggle="modal"
+          data-bs-target="#ModalShare"
+        >
+          <i class="fa-solid fa-share-nodes fa-sm"></i>
+          <p i18n class="share-option-text">share</p>
+        </div>
+
+        <div
+          class="share-option d-flex flex-row gap-2"
+          data-bs-toggle="modal"
+          data-bs-target="#ModalQuestion"
+        >
+          <i class="fa-regular fa-circle-question fa-sm"></i>
+          <p i18n class="share-option-text">ASK A QUESTION</p>
+        </div>
+
+        <div
+          class="share-option d-flex flex-row gap-2"
+          data-bs-toggle="modal"
+          data-bs-target="#ModalFAQ"
+        >
+          <i class="fa-solid fa-message fa-sm"></i>
+          <a i18n routerLink="/faq"> <p class="share-option-text">FAQ</p> </a>
+        </div>
+      </div>
+
+      <div style="border-top: 3px solid #d9d9d9; opacity: 100%"></div>
+
+      <div class="payment-options">
+        <p i18n class="safe-checkout">GUARANTEED SAFE CHECKOUT:</p>
+        <img
+          class="lazyloaded"
+          data-src="//nov-freshmate.myshopify.com/cdn/shop/files/payment_700x.png?v=1689231322"
+          alt="Payments"
+          src="//nov-freshmate.myshopify.com/cdn/shop/files/payment_700x.png?v=1689231322"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  style="border-top: 3px solid #d9d9d9; opacity: 100%; margin-top: 30px"
+></div>
+
+<div class="ProductSignlePolicy section-policy pt-55 pb-55 overflow_hidden">
+  <div class="container">
+    <div class="row">
+      <div
+        class="nov-policy-item style2 style-product-detail bg-icon col-lg-4 col-md-4 col-sm-12 col-12 mb-sm-30"
+      >
+        <div class="policy__item--content d-flex d-md-block d-lg-flex gap-4">
+          <div
+            class="policy-icon d-inline-flex align-items-center justify-content-center position-relative mb-md-20 mb-sm-0"
+          >
+            <img
+              class="lazyload"
+              src="assets/images/p-8_200x.webp"
+              alt="icon_policy"
+            />
+          </div>
+
+          <div class="heading--policy">
+            <div i18n class="title-policy f_pr font-800" style="color: #000000">
+              FREE SHIPPING
+            </div>
+            <div class="desc-policy mt-10" style="color: #505157">
+              <p i18n>Free shipping order above $200</p>
+            </div>
+            <a i18n class="font-600 hover:c_pr cursor">
+              Learn More
+              <i class="zmdi zmdi-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="nov-policy-item style2 style-product-detail bg-icon col-lg-4 col-md-4 col-sm-12 col-12 mb-sm-30"
+      >
+        <div class="policy__item--content d-flex d-md-block d-lg-flex gap-4">
+          <div
+            class="policy-icon d-inline-flex align-items-center justify-content-center position-relative mb-md-20 mb-sm-0"
+          >
+            <img
+              class="lazyload"
+              src="assets/images/p-12_200x.webp"
+              alt="icon_policy"
+            />
+          </div>
+
+          <div class="heading--policy">
+            <div i18n class="title-policy f_pr font-800" style="color: #000000">
+              SUPPORT 24/7
+            </div>
+            <div i18n class="desc-policy mt-10" style="color: #505157">
+              <p>Contact us 24 hours a day, 7 days a week</p>
+            </div>
+
+            <a i18n class="font-600 hover:c_pr cursor">
+              Learn More
+              <i class="zmdi zmdi-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="nov-policy-item style2 style-product-detail bg-icon col-lg-4 col-md-4 col-sm-12 col-12"
+      >
+        <div class="policy__item--content d-flex d-md-block d-lg-flex gap-4">
+          <div
+            class="policy-icon d-inline-flex align-items-center justify-content-center position-relative mb-md-20 mb-sm-0"
+          >
+            <img
+              class="lazyload"
+              src="assets/images/p-13_200x.webp"
+              alt="icon_policy"
+            />
+          </div>
+
+          <div class="heading--policy">
+            <div i18n class="title-policy f_pr font-800" style="color: #000000">
+              7 DAYS RETURN
+            </div>
+            <div i18n class="desc-policy mt-10" style="color: #505157">
+              <p>Return it within 30 days for an exchange.</p>
+            </div>
+
+            <a i18n routerLink="/aboutus" class="font-600 hover:c_pr">
+              Learn More
+              <i class="zmdi zmdi-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  style="border-top: 3px solid #d9d9d9; opacity: 100%; margin-top: 30px"
+></div>
+<div class="d-flex justify-content-around">
+  <div class="related-products d-flex flex-column gap-2">
+    <p i18n class="related-products-text">Related products</p>
+    <div class="related-products-list row container">
+      <div [class.ltr]="ltr">
+        <ngx-slick-carousel
+          class="carousel"
+          #slickModal="slick-carousel"
+          [config]="slideConfig"
+        >
+          @for (item of products; track $index) {
+          <app-product
+            class="slide"
+            ngxSlickItem
+            [product]="item"
+          ></app-product>
+          }
+        </ngx-slick-carousel>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+
+<div class="d-flex justify-content-around">
+  <div class="info-partition">
+    <ul class="nav nav-tabs d-flex flex-row gap-4" id="myTabs">
+      <li class="nav-item">
+        <a i18n class="nav-link active" data-toggle="tab" href="#policy"
+          >DELIVERY POLICY</a
+        >
+      </li>
+      <li class="nav-item">
+        <a i18n class="nav-link" data-toggle="tab" href="#shipping"
+          >SHIPPING AND RETURN</a
+        >
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="policy" class="tab-pane fade in show active">
+        <li i18n>
+          Our delivery team handles your orders with care to maintain the
+          freshness and quality of your items. You will receive notifications
+          regarding the status of your delivery, including tracking information,
+          to keep you informed every step of the way.
+        </li>
+      </div>
+
+      <div id="shipping" class="tab-pane fade">
+        <li i18n>
+          Shipping fees, if applicable, will be clearly indicated during the
+          checkout process. We may offer free shipping promotions from time to
+          time, so be sure to check our website for any ongoing offers
+        </li>
+        <li i18n>
+          To initiate a return or exchange, please contact our customer support
+          team with your order details and a brief explanation of the issue. We
+          may require photographic evidence in some cases to facilitate the
+          return process
+        </li>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+
+<div
+  aria-live="polite"
+  aria-atomic="true"
+  class="toast-container d-flex justify-content-center align-items-center"
+  id="toastContainer"
+>
+  <div
+    class="toast"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    id="passwordToast"
+  >
+    <div class="toast-header bg-danger text-white">
+      <i class="fa-solid fa-bell fa-xl" style="color: #ffffff"></i>
+      <p i18n class="mr-auto">THIS ITEM HAS BEEN ADDED TO YOUR WISHLIST</p>
+    </div>
+
+    <div class="d-flex flex-row toast-body">
+      @if(product.images[0]) {
+      <img
+        src="http://localhost:8000/{{ product.images[0] }}"
+        class="toast-img"
+      />
+      }
+      <h3 class="toast-product-name">{{ product.title[lang] }}</h3>
+      <a routerLink="/wishlist">
+        <button i18n class="go-to-wishlist-btn">GO TO WISHLIST</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="ModalShare"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p i18n class="cpy-text">Copy Link</p>
+        <div class="nov-copy d-flex gap-3">
+          <input
+            #inputElement
+            class="path-cpy"
+            type="text"
+            value="https://freshmate.com/products/american-beef"
+          />
+          <div
+            i18n
+            class="copy-btn btn"
+            (click)="copyToClipboard(inputElement)"
+          >
+            Copy
+          </div>
+        </div>
+        <p i18n class="share-text">share</p>
+        <div class="share-icons d-flex flex-row gap-4">
+          <p><i class="fa-brands fa-facebook-f"></i></p>
+          <p><i class="fa-brands fa-twitter"></i></p>
+          <p><i class="fa-brands fa-pinterest-p"></i></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="ModalQuestion"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5> -->
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p i18n class="question-text">ASK A QUESTION</p>
+        <p i18n class="request">
+          Please enter the details of your request. A member of our support
+          staff will respond as soon as possible.
+        </p>
+        <div class="modal-body d-flex flex-column gap-4">
+          <input
+            i18n-placeholder
+            class="form-control data"
+            type="text"
+            placeholder="YOUR NAME"
+          />
+          <input
+            i18n-placeholder
+            class="form-control data"
+            type="text"
+            placeholder="YOUR EMAIL"
+          />
+          <input
+            i18n-placeholder
+            class="form-control data"
+            type="text"
+            placeholder="PHONE NUMBER"
+          />
+          <textarea
+            i18n-placeholder
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="YOUR MESSAGE"
+          ></textarea>
+          <button i18n class="submit-btn" data-bs-dismiss="modal">
+            SUBMIT
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
